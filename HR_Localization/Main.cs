@@ -39,10 +39,10 @@ namespace HR_Localization
             fl = new File_Load(Application.StartupPath + @"\" + sr.ReadLine() + ".cfg"); ;
             sr.Close();
             sr = null;
-            this.Text = fl.GetValue("Main.Title");
-            this.label1.Text = fl.GetValue("Main.Target");
-            this.label2.Text = fl.GetValue("Main.Item");
-            this.label3.Text = fl.GetValue("Main.Input");
+            this.Text = fl.GetValue("Main.Title") + ":";
+            this.label1.Text = fl.GetValue("Main.Target") + ":";
+            this.label2.Text = fl.GetValue("Main.Item") + ":";
+            this.label3.Text = fl.GetValue("Main.Input") + ":";
             this.Commit.Text = fl.GetValue("Main.Confirm");
             this.Rechoose.Text = fl.GetValue("Main.Rechoose");
         }
