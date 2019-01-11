@@ -20,8 +20,6 @@ namespace HR_Localization
         static int NORMAL = 0;
         static int WRRING = 1;
         static int ERROR = 2;
-        ColumnHeader Item = new ColumnHeader();
-        ColumnHeader Data = new ColumnHeader();
 
         public Main()
         {
@@ -57,8 +55,10 @@ namespace HR_Localization
             this.label3.Text = fl.GetValue("Main.Input") + ":";
             this.Commit.Text = fl.GetValue("Main.Confirm");
             this.Rechoose.Text = fl.GetValue("Main.Rechoose");
-            this.ItemBox.Columns.Add(Item);
-            this.ItemBox.Columns.Add(Data);
+            string result;
+            ListViewItem lv = new ListViewItem("项目");
+            lv.SubItems.Add("项目");
+            this.ItemBox.Items.Add(lv);
             Log("启动正常", Main.NORMAL);
 
 
@@ -83,10 +83,12 @@ namespace HR_Localization
         public void LoadItem()
         {
             string result;
+            ListViewItem lv = new ListViewItem("项");
+            this.ItemBox.Items.Add(lv);
             flr.BaseStream.Seek(0, SeekOrigin.Begin);
             while((result = flr.ReadLine()) != null)
             {
-                
+                string[] a = result.Split('=');
             }
         }
     }

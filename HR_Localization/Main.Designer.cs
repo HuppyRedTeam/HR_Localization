@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("aaaa");
             this.label1 = new System.Windows.Forms.Label();
             this.Choose_Leng = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -38,6 +39,8 @@
             this.Logbox = new System.Windows.Forms.RichTextBox();
             this.Inputbox = new System.Windows.Forms.TextBox();
             this.ItemBox = new System.Windows.Forms.ListView();
+            this.Item = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Data = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // label1
@@ -123,11 +126,27 @@
             // 
             // ItemBox
             // 
+            this.ItemBox.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.Item,
+            this.Data});
+            this.ItemBox.GridLines = true;
+            this.ItemBox.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
+            listViewItem1});
+            this.ItemBox.LabelWrap = false;
             this.ItemBox.Location = new System.Drawing.Point(345, 9);
             this.ItemBox.Name = "ItemBox";
             this.ItemBox.Size = new System.Drawing.Size(525, 528);
             this.ItemBox.TabIndex = 10;
             this.ItemBox.UseCompatibleStateImageBehavior = false;
+            // 
+            // Item
+            // 
+            this.Item.Text = "项目";
+            // 
+            // Data
+            // 
+            this.Data.Text = "数据";
+            this.Data.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // Main
             // 
@@ -165,5 +184,7 @@
         private System.Windows.Forms.RichTextBox Logbox;
         private System.Windows.Forms.TextBox Inputbox;
         private System.Windows.Forms.ListView ItemBox;
+        private System.Windows.Forms.ColumnHeader Item;
+        private System.Windows.Forms.ColumnHeader Data;
     }
 }
