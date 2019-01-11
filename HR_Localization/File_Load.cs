@@ -18,7 +18,9 @@ namespace HR_Localization
             fl = new FileInfo(path);
             try
             {
-                sr = new StreamReader(fl.Open(FileMode.Open));
+                FileStream fs = fl.Open(FileMode.Open);
+                sr = new StreamReader(fs);
+                wr = new StreamWriter(fs);
 
             }
             catch (IOException e)

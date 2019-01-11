@@ -35,8 +35,9 @@
             this.label3 = new System.Windows.Forms.Label();
             this.Commit = new System.Windows.Forms.Button();
             this.Rechoose = new System.Windows.Forms.Button();
-            this.Contbox = new System.Windows.Forms.RichTextBox();
             this.Logbox = new System.Windows.Forms.RichTextBox();
+            this.Inputbox = new System.Windows.Forms.TextBox();
+            this.ItemBox = new System.Windows.Forms.ListView();
             this.SuspendLayout();
             // 
             // label1
@@ -105,14 +106,6 @@
             this.Rechoose.UseVisualStyleBackColor = true;
             this.Rechoose.Click += new System.EventHandler(this.Rechoose_Click);
             // 
-            // Contbox
-            // 
-            this.Contbox.Location = new System.Drawing.Point(322, 28);
-            this.Contbox.Name = "Contbox";
-            this.Contbox.Size = new System.Drawing.Size(533, 511);
-            this.Contbox.TabIndex = 7;
-            this.Contbox.Text = "";
-            // 
             // Logbox
             // 
             this.Logbox.Location = new System.Drawing.Point(10, 198);
@@ -121,13 +114,29 @@
             this.Logbox.TabIndex = 8;
             this.Logbox.Text = "";
             // 
+            // Inputbox
+            // 
+            this.Inputbox.Location = new System.Drawing.Point(124, 98);
+            this.Inputbox.Name = "Inputbox";
+            this.Inputbox.Size = new System.Drawing.Size(185, 25);
+            this.Inputbox.TabIndex = 9;
+            // 
+            // ItemBox
+            // 
+            this.ItemBox.Location = new System.Drawing.Point(345, 9);
+            this.ItemBox.Name = "ItemBox";
+            this.ItemBox.Size = new System.Drawing.Size(525, 528);
+            this.ItemBox.TabIndex = 10;
+            this.ItemBox.UseCompatibleStateImageBehavior = false;
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(882, 553);
+            this.Controls.Add(this.ItemBox);
+            this.Controls.Add(this.Inputbox);
             this.Controls.Add(this.Logbox);
-            this.Controls.Add(this.Contbox);
             this.Controls.Add(this.Rechoose);
             this.Controls.Add(this.Commit);
             this.Controls.Add(this.label3);
@@ -153,7 +162,8 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button Commit;
         private System.Windows.Forms.Button Rechoose;
-        private System.Windows.Forms.RichTextBox Contbox;
         private System.Windows.Forms.RichTextBox Logbox;
+        private System.Windows.Forms.TextBox Inputbox;
+        private System.Windows.Forms.ListView ItemBox;
     }
 }

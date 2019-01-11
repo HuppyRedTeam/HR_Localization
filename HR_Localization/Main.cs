@@ -16,6 +16,12 @@ namespace HR_Localization
         File_Load fl;
         Value_Replace vr;
         StreamReader flr;
+        StreamWriter flw;
+        static int NORMAL = 0;
+        static int WRRING = 1;
+        static int ERROR = 2;
+        ColumnHeader Item = new ColumnHeader();
+        ColumnHeader Data = new ColumnHeader();
 
         public Main()
         {
@@ -36,15 +42,52 @@ namespace HR_Localization
         {
             FileInfo loc = new FileInfo(Application.StartupPath + @"\set.lock");
             StreamReader sr = new StreamReader(loc.OpenRead());
-            fl = new File_Load(Application.StartupPath + @"\" + sr.ReadLine() + ".cfg"); ;
+            string l = sr.ReadLine();
+            fl = new File_Load(Application.StartupPath + @"\" + l + ".cfg");
+            Log("文件已加载",Main.NORMAL);
+            flr = fl.GetFileReader();
+            Log("选择语言:" + l,Main.NORMAL);
             sr.Close();
-            sr = null;
+            flw = fl.GetFileWriter();
+            Log("写入流开启", Main.NORMAL);
+
             this.Text = fl.GetValue("Main.Title") + ":";
             this.label1.Text = fl.GetValue("Main.Target") + ":";
             this.label2.Text = fl.GetValue("Main.Item") + ":";
             this.label3.Text = fl.GetValue("Main.Input") + ":";
             this.Commit.Text = fl.GetValue("Main.Confirm");
             this.Rechoose.Text = fl.GetValue("Main.Rechoose");
+            this.ItemBox.Columns.Add(Item);
+            this.ItemBox.Columns.Add(Data);
+            Log("启动正常", Main.NORMAL);
+
+
+        }
+
+        public void Log(string label,int level)
+        {
+            if(level == Main.NORMAL)
+            {
+                this.Logbox.AppendText("[INFO]:" + label + "\n");
+            }
+            if (level == Main.WRRING)
+            {
+                this.Logbox.AppendText("[WRRING]:" + label + "\n");
+            }
+            if(level == Main.ERROR)
+            {
+                this.Logbox.AppendText("[ERROR]:" + label + "\n");
+            }
+        }
+
+        public void LoadItem()
+        {
+            string result;
+            flr.BaseStream.Seek(0, SeekOrigin.Begin);
+            while((result = flr.ReadLine()) != null)
+            {
+                
+            }
         }
     }
 }
