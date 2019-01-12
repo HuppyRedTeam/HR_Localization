@@ -90,12 +90,14 @@
             // 
             // Commit
             // 
+            this.Commit.Enabled = false;
             this.Commit.Location = new System.Drawing.Point(7, 144);
             this.Commit.Name = "Commit";
             this.Commit.Size = new System.Drawing.Size(84, 22);
             this.Commit.TabIndex = 5;
             this.Commit.Text = "Main.Commit";
             this.Commit.UseVisualStyleBackColor = true;
+            this.Commit.Click += new System.EventHandler(this.Commit_Click);
             // 
             // Rechoose
             // 

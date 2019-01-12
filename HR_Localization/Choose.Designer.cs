@@ -40,7 +40,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(127, 15);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Choose.Language";
+            this.label1.Text = "Choose Language";
             // 
             // comboBox1
             // 
@@ -73,7 +73,7 @@
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label1);
             this.Name = "Choose";
-            this.Text = "Form.Choose.Title";
+            this.Text = "HR Luncher";
             this.Load += new System.EventHandler(this.Choose_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

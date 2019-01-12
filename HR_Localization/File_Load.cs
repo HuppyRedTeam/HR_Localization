@@ -12,13 +12,14 @@ namespace HR_Localization
         public FileInfo fl;
         public StreamReader sr;
         public StreamWriter wr;
+        public FileStream fs;
 
         public File_Load(string path)
         {
             fl = new FileInfo(path);
             try
             {
-                FileStream fs = fl.Open(FileMode.Open);
+                fs = fl.Open(FileMode.Open);
                 sr = new StreamReader(fs);
                 wr = new StreamWriter(fs);
 
@@ -58,6 +59,11 @@ namespace HR_Localization
         public StreamWriter GetFileWriter()
         {
             return this.wr;
+        }
+
+        public void CloseStream()
+        {
+            this.fs.Close();
         }
     }
 }
