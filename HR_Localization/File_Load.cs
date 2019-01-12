@@ -44,6 +44,12 @@ namespace HR_Localization
 
         }
 
+        public void Reset_Stream()
+        {
+            sr.BaseStream.Seek(0, SeekOrigin.Begin);
+            wr.BaseStream.Seek(0, SeekOrigin.Begin);
+        }
+
         public StreamReader GetFileReader()
         {
             return this.sr;

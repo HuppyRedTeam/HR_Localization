@@ -28,19 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("aaaa");
             this.label1 = new System.Windows.Forms.Label();
             this.Choose_Leng = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.ItemSel = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.Commit = new System.Windows.Forms.Button();
             this.Rechoose = new System.Windows.Forms.Button();
             this.Logbox = new System.Windows.Forms.RichTextBox();
             this.Inputbox = new System.Windows.Forms.TextBox();
-            this.ItemBox = new System.Windows.Forms.ListView();
-            this.Item = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Data = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.ItemBox = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
             // label1
@@ -73,13 +70,14 @@
             this.label2.TabIndex = 2;
             this.label2.Text = "Main.Item";
             // 
-            // comboBox1
+            // ItemSel
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(124, 57);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(140, 23);
-            this.comboBox1.TabIndex = 3;
+            this.ItemSel.FormattingEnabled = true;
+            this.ItemSel.Location = new System.Drawing.Point(124, 57);
+            this.ItemSel.Name = "ItemSel";
+            this.ItemSel.Size = new System.Drawing.Size(140, 23);
+            this.ItemSel.TabIndex = 3;
+            this.ItemSel.SelectedIndexChanged += new System.EventHandler(this.ItemSel_SelectedIndexChanged);
             // 
             // label3
             // 
@@ -113,7 +111,7 @@
             // 
             this.Logbox.Location = new System.Drawing.Point(10, 198);
             this.Logbox.Name = "Logbox";
-            this.Logbox.Size = new System.Drawing.Size(299, 340);
+            this.Logbox.Size = new System.Drawing.Size(314, 340);
             this.Logbox.TabIndex = 8;
             this.Logbox.Text = "";
             // 
@@ -126,27 +124,13 @@
             // 
             // ItemBox
             // 
-            this.ItemBox.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.Item,
-            this.Data});
-            this.ItemBox.GridLines = true;
-            this.ItemBox.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1});
-            this.ItemBox.LabelWrap = false;
-            this.ItemBox.Location = new System.Drawing.Point(345, 9);
+            this.ItemBox.FormattingEnabled = true;
+            this.ItemBox.ItemHeight = 15;
+            this.ItemBox.Location = new System.Drawing.Point(349, 21);
             this.ItemBox.Name = "ItemBox";
-            this.ItemBox.Size = new System.Drawing.Size(525, 528);
+            this.ItemBox.Size = new System.Drawing.Size(521, 529);
             this.ItemBox.TabIndex = 10;
-            this.ItemBox.UseCompatibleStateImageBehavior = false;
-            // 
-            // Item
-            // 
-            this.Item.Text = "项目";
-            // 
-            // Data
-            // 
-            this.Data.Text = "数据";
-            this.Data.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.ItemBox.SelectedIndexChanged += new System.EventHandler(this.ItemBox_SelectedIndexChanged);
             // 
             // Main
             // 
@@ -159,7 +143,7 @@
             this.Controls.Add(this.Rechoose);
             this.Controls.Add(this.Commit);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.ItemSel);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.Choose_Leng);
             this.Controls.Add(this.label1);
@@ -177,14 +161,12 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox Choose_Leng;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox ItemSel;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button Commit;
         private System.Windows.Forms.Button Rechoose;
         private System.Windows.Forms.RichTextBox Logbox;
         private System.Windows.Forms.TextBox Inputbox;
-        private System.Windows.Forms.ListView ItemBox;
-        private System.Windows.Forms.ColumnHeader Item;
-        private System.Windows.Forms.ColumnHeader Data;
+        private System.Windows.Forms.ListBox ItemBox;
     }
 }

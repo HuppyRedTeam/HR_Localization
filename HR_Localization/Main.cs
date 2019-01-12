@@ -55,12 +55,10 @@ namespace HR_Localization
             this.label3.Text = fl.GetValue("Main.Input") + ":";
             this.Commit.Text = fl.GetValue("Main.Confirm");
             this.Rechoose.Text = fl.GetValue("Main.Rechoose");
-            string result;
-            ListViewItem lv = new ListViewItem("项目");
-            lv.SubItems.Add("项目");
-            this.ItemBox.Items.Add(lv);
             Log("启动正常", Main.NORMAL);
-
+            LoadItem();
+            Log("读取完成", Main.NORMAL);
+            flr.BaseStream.Seek(0, SeekOrigin.Begin);
 
         }
 
@@ -83,13 +81,36 @@ namespace HR_Localization
         public void LoadItem()
         {
             string result;
-            ListViewItem lv = new ListViewItem("项");
-            this.ItemBox.Items.Add(lv);
             flr.BaseStream.Seek(0, SeekOrigin.Begin);
             while((result = flr.ReadLine()) != null)
             {
                 string[] a = result.Split('=');
+                this.ItemSel.Items.Add(a[0]);
+                this.ItemBox.Items.Add(result);
             }
+        }
+
+        private void ItemBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string result;
+            try
+            {
+                result = this.ItemBox.SelectedItem.ToString();
+            }catch(Exception ea)
+            {
+                return;
+            }
+            string[] a = result.Split('=');
+            this.ItemSel.Text = a[0];
+            this.Inputbox.Text = a[1];
+        }
+
+        private void ItemSel_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string select = this.ItemSel.Text;
+            string a = fl.GetValue(select);
+            fl.Reset_Stream();
+            this.Inputbox.Text = a;
         }
     }
 }
