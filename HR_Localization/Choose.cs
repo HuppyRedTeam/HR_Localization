@@ -35,7 +35,7 @@ namespace HR_Localization
             }
             else
             {
-                File_Load file = new File_Load(Application.StartupPath + @"\" + comboBox1.Text.Trim() + ".cfg");
+                File_Load file = new File_Load(Application.StartupPath + @"\" + comboBox1.Text.Trim() + ".cfg",File_Load.Open);
                 Value_Replace vr = new Value_Replace(file.GetValue("Choose.MessageBox.MissFileName"));
                 DialogResult dr =  MessageBox.Show(vr.Handle(comboBox1.Text.Trim() + ".cfg"), file.GetValue("Choose.MessageBox.MissFileName.Title"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 if (dr.Equals(DialogResult.OK))

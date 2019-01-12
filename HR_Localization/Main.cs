@@ -48,7 +48,7 @@ namespace HR_Localization
             FileInfo loc = new FileInfo(Application.StartupPath + @"\set.lock");
             StreamReader sr = new StreamReader(loc.OpenRead());
             string l = sr.ReadLine();
-            fl = new File_Load(Application.StartupPath + @"\" + l + ".cfg");
+            fl = new File_Load(Application.StartupPath + @"\" + l + ".cfg",File_Load.Open);
             Log("文件已加载",Main.NORMAL);
             flr = fl.GetFileReader();
             Log("选择语言:" + l,Main.NORMAL);
@@ -66,10 +66,9 @@ namespace HR_Localization
             LoadItem();
             Log("读取完成", Main.NORMAL);
             flr.BaseStream.Seek(0, SeekOrigin.Begin);
-
             new Thread(new ThreadStart(RefreshButton)).Start();
-            
-
+            fl.CloseStream();
+            fl = null;
         }
 
         public void RefreshButton()
@@ -130,24 +129,24 @@ namespace HR_Localization
         private void ItemSel_SelectedIndexChanged(object sender, EventArgs e)
         {
             string select = this.ItemSel.Text;
+            fl = new File_Load(Application.StartupPath + @"\" + this.Choose_Leng.Text + ".cfg", File_Load.Open);
             string a = fl.GetValue(select);
             fl.Reset_Stream();
             this.Inputbox.Text = a;
+            fl.CloseStream();
+            fl = null;
         }
 
         private void Commit_Click(object sender, EventArgs e)
         {
-
-            if(fl == null)
+            if (fl != null)
             {
-                fl = new File_Load(Application.StartupPath + @"\" + this.Choose_Leng.Text + ".cfg");
-                flr = fl.GetFileReader();
-                flw = fl.GetFileWriter();
+                fl.CloseStream();
+                fl = null;
             }
-            else
-            {
-                fl.Reset_Stream();
-            }
+            fl = new File_Load(Application.StartupPath + @"\zh_CN.cfg",File_Load.Clear);
+            flr = fl.GetFileReader();
+            flw = fl.GetFileWriter();
             Processing p = new Processing();
             p.Show();
             ProgressBar pb = p.GetProgress();
@@ -158,11 +157,12 @@ namespace HR_Localization
                 line++;
             }
             string r;
-            string[] result = new string[line];
+            string[] result = new string[line+1];
             int i = 0;
             fl.Reset_Stream();
-            while ((r = flr.ReadLine()) != null)
+            while (i<result.Length)
             {
+                r = flr.ReadLine();
                 if(pb.Value < 20)
                 {
                     pb.Value = i;
@@ -173,32 +173,46 @@ namespace HR_Localization
             }
             pb.Value = 25;
             status.Text = "开始写入";
-            fl.CloseStream();
-            fl = null;
-            FileStream fls = new FileStream(Application.StartupPath + @"\" + this.Choose_Leng.Text + ".cfg",FileMode.Create);
-            StreamWriter sw = new StreamWriter(fls);
+            StreamReader sr = fl.GetFileReader();
+            StreamWriter sw = fl.GetFileWriter();
             status.Text = "已创建写入流";
             pb.Value = 45;
-            for (int a = 0; a < result.Length; a++ )
+            for (int a = 0; a < result.Length-1; a++ )
             {
                 if(pb.Value < 75)
                 {
                     pb.Value = 45 + a;
                 }
                 string re = result[a];
-                string[] m = re.Split('=');
-                if(m[0].Equals(this.ItemSel.Text))
+                string[] rea = re.Split('=');
+                string input = this.ItemSel.Text + "=" + this.Inputbox.Text;
+                Log(rea[0], Main.NORMAL);
+                if (rea[0].Equals(this.ItemSel.Text))
                 {
-                    result[a] = this.ItemSel.Text + "=" + this.Inputbox.Text;
+                    Log(rea[0], Main.NORMAL);
+                    sw.WriteLine(input);
+                    sw.Flush();
                 }
+                else
+                {
+                    sw.WriteLine(result[a]);
+                    sw.Flush();
+                }
+
                 status.Text = "正在写入第：" + a + "行";
-                sw.WriteLine(result[a]);
             }
             status.Text = "已完成所有操作";
             pb.Value = 100;
             MessageBox.Show("已完成更新", "操作结果", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             p.Dispose();
-            sw.Close();
+            sr.BaseStream.Seek(0, SeekOrigin.Begin);
+            while((r = sr.ReadLine()) != null)
+            {
+                this.ItemBox.Items.Clear();
+                this.ItemBox.Items.Add(r);
+            }
+            fl.CloseStream();
+            fl = null;
         }
     }
 }

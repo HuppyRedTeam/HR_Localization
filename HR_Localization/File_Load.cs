@@ -13,30 +13,53 @@ namespace HR_Localization
         public StreamReader sr;
         public StreamWriter wr;
         public FileStream fs;
+        public static int Open = 0;
+        public static int Clear = 1;
 
-        public File_Load(string path)
+        public File_Load(string path,int mode)
         {
-            fl = new FileInfo(path);
-            try
+            if(mode == File_Load.Open)
             {
-                fs = fl.Open(FileMode.Open);
-                sr = new StreamReader(fs);
-                wr = new StreamWriter(fs);
+                fl = new FileInfo(path);
+                try
+                {
+                    fs = fl.Open(FileMode.Open);
+                    sr = new StreamReader(fs);
+                    wr = new StreamWriter(fs);
 
+                }
+                catch (IOException e)
+                {
+                    MessageBox.Show("Can't find file: " + e.ToString());
+                    System.Environment.Exit(0);
+                }
             }
-            catch (IOException e)
+            if(mode == File_Load.Clear)
             {
-                MessageBox.Show("Can't find file: " + e.ToString());
-                System.Environment.Exit(0);
+                fl = new FileInfo(path);
+                try
+                {
+                    fs = fl.Open(FileMode.Create);
+                    sr = new StreamReader(fs);
+                    wr = new StreamWriter(fs);
+
+                }
+                catch (IOException e)
+                {
+                    MessageBox.Show("Can't find file: " + e.ToString());
+                    System.Environment.Exit(0);
+                }
             }
         }
+
+
 
         public string GetValue(string value)
         {
             string result;
             while((result = sr.ReadLine()) != null){
                 string[] con = result.Split('=');
-                if (con[0].ToLower().Equals(value.ToLower()))
+                if ((con[0].ToLower().Equals(value.ToLower()))&&con.Length == 2)
                 {
                     return con[1];
                 }
@@ -64,6 +87,7 @@ namespace HR_Localization
         public void CloseStream()
         {
             this.fs.Close();
+            fs = null;
         }
     }
 }
