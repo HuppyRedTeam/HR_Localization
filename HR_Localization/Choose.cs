@@ -43,6 +43,8 @@ namespace HR_Localization
                     lockf.Delete();
                     System.Environment.Exit(0);
                 }
+                file.CloseStream();
+                file = null;
                 len = null;
             }
         }

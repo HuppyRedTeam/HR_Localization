@@ -33,6 +33,11 @@ namespace HR_Localization
         {
             FileInfo loc = new FileInfo(Application.StartupPath + @"\set.lock");
             loc.Delete();
+            if(fl != null)
+            {
+                fl.CloseStream();
+                fl = null;
+            }
             this.Dispose();
             Process.Start(System.Reflection.Assembly.GetExecutingAssembly().Location);
             
@@ -62,6 +67,8 @@ namespace HR_Localization
             this.label3.Text = fl.GetValue("Main.Input") + ":";
             this.Commit.Text = fl.GetValue("Main.Confirm");
             this.Rechoose.Text = fl.GetValue("Main.Rechoose");
+            this.Choose_Leng.Text = l;
+            this.Choose_Leng.Enabled = false;
             Log("启动正常", Main.NORMAL);
             LoadItem();
             Log("读取完成", Main.NORMAL);
@@ -129,6 +136,12 @@ namespace HR_Localization
 
         private void ItemSel_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if(fl == null)
+            {
+                fl = new File_Load(Application.StartupPath + @"\" + this.Choose_Leng.Text + ".cfg");
+                flr = fl.GetFileReader();
+                flw = fl.GetFileWriter();
+            }
             string select = this.ItemSel.Text;
             string a = fl.GetValue(select);
             fl.Reset_Stream();
@@ -146,6 +159,11 @@ namespace HR_Localization
             }
             else
             {
+                fl.CloseStream();
+                fl = null;
+                fl = new File_Load(Application.StartupPath + @"\" + this.Choose_Leng.Text + ".cfg");
+                flr = fl.GetFileReader();
+                flw = fl.GetFileWriter();
                 fl.Reset_Stream();
             }
             Processing p = new Processing();
@@ -199,6 +217,15 @@ namespace HR_Localization
             MessageBox.Show("已完成更新", "操作结果", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             p.Dispose();
             sw.Close();
+            fl = new File_Load(Application.StartupPath + @"\" + this.Choose_Leng.Text + ".cfg");
+            StreamReader sr = fl.GetFileReader();
+            string b;
+            ItemBox.Items.Clear();
+            while((b = sr.ReadLine()) != null)
+            {
+                ItemBox.Items.Add(b);
+            }
         }
+
     }
 }

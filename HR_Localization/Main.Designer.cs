@@ -56,7 +56,7 @@
             "zh_CN",
             "jp",
             "eng"});
-            this.Choose_Leng.Location = new System.Drawing.Point(124, 22);
+            this.Choose_Leng.Location = new System.Drawing.Point(184, 17);
             this.Choose_Leng.Name = "Choose_Leng";
             this.Choose_Leng.Size = new System.Drawing.Size(140, 23);
             this.Choose_Leng.TabIndex = 1;
@@ -64,7 +64,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 60);
+            this.label2.Location = new System.Drawing.Point(12, 63);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(79, 15);
             this.label2.TabIndex = 2;
@@ -73,7 +73,7 @@
             // ItemSel
             // 
             this.ItemSel.FormattingEnabled = true;
-            this.ItemSel.Location = new System.Drawing.Point(124, 57);
+            this.ItemSel.Location = new System.Drawing.Point(184, 55);
             this.ItemSel.Name = "ItemSel";
             this.ItemSel.Size = new System.Drawing.Size(140, 23);
             this.ItemSel.TabIndex = 3;
@@ -119,7 +119,7 @@
             // 
             // Inputbox
             // 
-            this.Inputbox.Location = new System.Drawing.Point(124, 98);
+            this.Inputbox.Location = new System.Drawing.Point(139, 91);
             this.Inputbox.Name = "Inputbox";
             this.Inputbox.Size = new System.Drawing.Size(185, 25);
             this.Inputbox.TabIndex = 9;
